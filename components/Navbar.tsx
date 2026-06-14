@@ -6,16 +6,12 @@ import Image from "next/image";
 import {
   FaMagnifyingGlass,
   FaBell,
-  FaBars,
-  FaXmark,
   FaHeart,
   FaCircleQuestion,
   FaGlobe,
 } from "react-icons/fa6";
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   {
     /* logika: state simulasi status login (ubah ke true untuk testing mode login) */
   }
@@ -25,10 +21,9 @@ export default function Navbar() {
     <>
       <header className="sticky top-0 z-50 w-full bg-primary text-white shadow-sm font-sans">
         {/* ================= BARIS 1: TOP NAVBAR (OTOMATIS HILANG DI MOBILE) ================= */}
-        {/* logika: menggunakan kelas 'hidden md:block' agar tersembunyi total di layar HP */}
         <div className="hidden md:block w-full border-b border-white/10 bg-black/10">
           <div className="max-w-7xl mx-auto h-9 px-4 sm:px-6 lg:px-8 flex items-center justify-between text-[12px] font-light text-white/90">
-            {/* logika: menu akses instansi & sosial media sebelah kiri */}
+            {/* Menu akses instansi & sosial media sebelah kiri */}
             <div className="flex items-center gap-3">
               <Link
                 href="/mitra"
@@ -47,7 +42,6 @@ export default function Navbar() {
 
               <div className="hidden sm:flex items-center gap-2">
                 <span className="text-white/80">Ikuti kami di</span>
-                {/* logika: komponen SVG Facebook */}
                 <a
                   href="https://facebook.com"
                   target="_blank"
@@ -59,7 +53,6 @@ export default function Navbar() {
                     <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z" />
                   </svg>
                 </a>
-                {/* logika: komponen SVG Instagram */}
                 <a
                   href="https://instagram.com"
                   target="_blank"
@@ -71,7 +64,6 @@ export default function Navbar() {
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
                   </svg>
                 </a>
-                {/* logika: komponen SVG Threads */}
                 <a
                   href="https://threads.net"
                   target="_blank"
@@ -86,7 +78,7 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* logika: menu fungsional sebelah kanan */}
+            {/* Menu fungsional sebelah kanan */}
             <div className="flex items-center gap-4">
               {isLoggedIn && (
                 <Link
@@ -140,17 +132,8 @@ export default function Navbar() {
         </div>
 
         {/* ================= BARIS 2: MAIN NAVBAR (LOGO, SEARCH, FAVORIT) ================= */}
-        {/* logika: container utama menggunakan items-center di mobile agar search bar sejajar lurus dengan tombol menu */}
         <div className="max-w-7xl mx-auto py-3 md:pt-4 md:pb-3 px-4 sm:px-6 lg:px-8 flex items-center md:items-start justify-between gap-3 md:gap-8">
-          {/* logika: tombol menu hamburger khusus mobile dipindah ke paling kiri untuk merapikan layout */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-1.5 text-white text-xl transition-colors focus:outline-none bg-transparent border-none cursor-pointer shrink-0"
-          >
-            {isMenuOpen ? <FaXmark /> : <FaBars />}
-          </button>
-
-          {/* logika: logo utama yang hanya muncul di layar ukuran medium ke atas */}
+          {/* Logo utama: hanya muncul di desktop (md ke atas) */}
           <Link href="/" className="hidden md:flex items-center shrink-0 pt-1">
             <Image
               src="/images/logo.png"
@@ -162,7 +145,7 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* SISI TENGAH: Search bar lebar & baris tag kategori di bawahnya */}
+          {/* SISI TENGAH: Search bar (Otomatis meluas penuh di mobile karena tombol hamburger dihapus) */}
           <div className="flex-1 flex flex-col gap-1.5">
             <div className="w-full relative flex items-center">
               <input
@@ -175,7 +158,7 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* logika: baris kategori ditambahkan kelas 'hidden md:flex' agar tidak muncul sama sekali di mobile */}
+            {/* Baris tag kategori: tersembunyi di mobile, hanya tampil di desktop */}
             <div className="hidden md:flex items-center gap-4 text-[11px] text-white/85 overflow-x-auto no-scrollbar whitespace-nowrap font-light">
               <Link
                 href="/komoditas/cabai"
@@ -210,7 +193,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* SISI KANAN: Ikon Favorit */}
+          {/* SISI KANAN: Ikon Favorit (Tetap di pojok kanan untuk mobile & desktop) */}
           <div className="flex items-center shrink-0 text-white">
             <Link
               href="/favorit"
@@ -224,38 +207,6 @@ export default function Navbar() {
             </Link>
           </div>
         </div>
-
-        {/* Mobile Menu Drawer */}
-        {isMenuOpen && (
-          <div className="md:hidden w-full bg-white dark:bg-zinc-900 border-b border-slate-200 dark:border-zinc-800 px-4 py-4 space-y-4 absolute left-0 right-0 shadow-lg text-slate-700 dark:text-zinc-200">
-            <div className="flex flex-col space-y-3 font-semibold text-sm">
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                Akses Menu
-              </span>
-              <Link
-                href="/mitra"
-                onClick={() => setIsMenuOpen(false)}
-                className="py-1"
-              >
-                Seller Centre
-              </Link>
-              <Link
-                href="/bantuan"
-                onClick={() => setIsMenuOpen(false)}
-                className="py-1"
-              >
-                Bantuan
-              </Link>
-              <Link
-                href="/favorit"
-                onClick={() => setIsMenuOpen(false)}
-                className="py-1 flex items-center gap-2 text-primary"
-              >
-                <FaHeart /> Favorit Saya
-              </Link>
-            </div>
-          </div>
-        )}
       </header>
     </>
   );
